@@ -1,0 +1,291 @@
+form{
+    margin-top: center;
+    padding: 50px;
+    background-color: rgb(255, 254, 253);
+    border: white solid 3px;
+    border-radius: 20px;
+}
+body{
+    background-color: gray;
+}
+
+/* CONFIGURACION GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #d9d9d9;
+    min-height: 100vh;
+}
+
+
+/* ENCABEZADO */
+.encabezado {
+    background-color: #bd6800;
+    height: 115px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.logo {
+    background-color: white;
+    padding: 15px;
+    border-radius: 6px;
+    color: #222;
+}
+
+.logo h1 {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.buscador {
+    display: flex;
+    align-items: center;
+    background-color: #17243a;
+    border-radius: 8px;
+    padding: 12px;
+    width: 300px;
+}
+
+.buscador input {
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    width: 100%;
+}
+
+.buscador input::placeholder {
+    color: #aaa;
+}
+
+.buscador span {
+    color: white;
+    font-size: 10px;
+}
+
+.iconos {
+    display: flex;
+    gap: 20px;
+}
+
+.iconos button {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+/* CONTENIDO PRINCIPAL */
+main {
+    max-width: 1000px;
+    margin: auto;
+    padding: 12px 20px 25px;
+}
+
+main h2 {
+    text-align: center;
+    font-size: 26px;
+    margin: 0 0 10px;
+    color: black;
+}
+
+
+/* TARJETAS */
+.opciones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    max-width: 720px;
+    margin: 0 auto 35px;
+}
+
+.tarjeta {
+    height: 90px;
+    padding: 12px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.tarjeta:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 10px #999;
+}
+
+.tarjeta h3 {
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+.tarjeta p {
+    font-size: 13px;
+    line-height: 17px;
+}
+
+.icono {
+    font-size: 25px;
+    margin-bottom: 3px;
+}
+
+
+/* COLORES DE TARJETAS */
+.inventario {
+    background-color: #d9f9e5;
+    color: #225a3b;
+}
+
+.entrada {
+    background-color: #dceaff;
+    color: #294d91;
+}
+
+.salida {
+    background-color: #ffead5;
+    color: #93431c;
+}
+
+.proveedores {
+    background-color: #e3e8ef;
+    color: #263447;
+}
+
+.productos {
+    background-color: #d9f1fc;
+    color: #17678b;
+}
+
+.reportes {
+    background-color: #fbe2f0;
+    color: #94244f;
+}
+
+
+/* PANEL DE INFORMACION */
+.panel {
+    background-color: white;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 25px;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 30px;
+    min-height: 245px;
+}
+
+.panel h3 {
+    font-size: 13px;
+    margin-bottom: 15px;
+    color: #17243a;
+}
+
+
+/* TABLAS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+}
+
+th {
+    text-align: left;
+    color: #555;
+    font-weight: normal;
+    padding: 8px 4px;
+    border-bottom: 1px solid #eee;
+}
+
+td {
+    padding: 9px 4px;
+    border-bottom: 1px solid #f1f1f1;
+    color: #333;
+}
+
+.positivo {
+    color: #16834b;
+    font-weight: bold;
+    text-align: center;
+}
+
+.negativo {
+    color: #d52c35;
+    font-weight: bold;
+    text-align: center;
+}
+
+
+/* ETIQUETAS */
+.etiqueta {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 9px;
+}
+
+.entrada-t {
+    background-color: #d9f9e5;
+    color: #16834b;
+}
+
+.salida-t {
+    background-color: #ffe0e0;
+    color: #c52c35;
+}
+
+
+/* PIE DE PAGINA */
+footer {
+    height: 65px;
+    background-color: #f49a08;
+    width: 100%;
+}
+
+
+/* DISEÑO PARA CELULARES */
+@media (max-width: 700px) {
+
+    .encabezado {
+        height: auto;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .logo {
+        order: 1;
+    }
+
+    .iconos {
+        order: 2;
+    }
+
+    .buscador {
+        order: 3;
+        width: 100%;
+    }
+
+    .opciones {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .panel {
+        grid-template-columns: 1fr;
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 300px;
+    }
+}
+
+@media (max-width: 400px) {
+    .opciones {
+        grid-template-columns: 1fr;
+    }
+}
