@@ -1,6 +1,7 @@
 form{
+
     margin-top: center;
-    padding: 50px;
+    padding: center;
     background-color: rgb(255, 254, 253);
     border: white solid 3px;
     border-radius: 20px;
@@ -31,13 +32,6 @@ body {
     align-items: center;
     justify-content: space-between;
     padding: 15px;
-}
-
-.logo {
-    background-color: white;
-    padding: 15px;
-    border-radius: 6px;
-    color: #222;
 }
 
 .logo h1 {
