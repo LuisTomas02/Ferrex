@@ -11,87 +11,63 @@ if(!isset($_SESSION['nombre_completo'])){
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Notas</title>
+        <title>Ferrex</title>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <script src="js/bootstrap.js"></script>
 
 </head>
-<!-- ENCABEZADO -->
     <header class="encabezado">
-
         <div class="logo">
-            <img src="../img/Ferrex.png" alt="Logo Ferrex">
+            <img src="img/5a9908e5-2df3-405b-8a8a-36cd29a986eb.png" style="width: 200px; height: 100px;">
         </div>
-
         <div class="buscador">
             <input type="text" placeholder="Buscar en el sistema...">
             <span>Ctrl K</span>
         </div>
-
         <div class="iconos">
             <button>🔔</button>
             <button>⚙️</button>
         </div>
-
     </header>
-
-
-    <!-- CONTENIDO PRINCIPAL -->
     <main>
-
         <h2>¿Qué vas a hacer hoy?</h2>
-
-        <!-- OPCIONES DEL SISTEMA -->
         <section class="opciones">
-
-            <a href="#" class="tarjeta inventario">
+            <a href="inventario.php" class="tarjeta inventario">
                 <div class="icono">▤</div>
                 <h3>Inventario</h3>
                 <p>Revisar stock disponible</p>
             </a>
-
-            <a href="#" class="tarjeta entrada">
+            <a href="registro_entrada.php" class="tarjeta entrada">
                 <div class="icono">🛒</div>
                 <h3>Registrar Entrada</h3>
                 <p>Ingreso de mercancía</p>
             </a>
-
-            <a href="#" class="tarjeta salida">
+            <a href="registro_salida.php" class="tarjeta salida">
                 <div class="icono">🛒</div>
                 <h3>Registrar Salida</h3>
                 <p>Salida o venta de productos</p>
             </a>
-
-            <a href="#" class="tarjeta proveedores">
+            <a href="proveedores.php" class="tarjeta proveedores">
                 <div class="icono">♙</div>
                 <h3>Proveedores</h3>
                 <p>Gestión de contactos</p>
             </a>
-
-            <a href="#" class="tarjeta productos">
+            <a href="productos.php" class="tarjeta productos">
                 <div class="icono">⬡</div>
                 <h3>Productos</h3>
                 <p>Consulta y administración</p>
             </a>
-
-            <a href="#" class="tarjeta reportes">
+            <a href="reportes.php" class="tarjeta reportes">
                 <div class="icono">▥</div>
                 <h3>Reportes</h3>
                 <p>Consulta de ventas y stock</p>
             </a>
-
         </section>
 
-
-        <!-- TABLAS DE INFORMACION -->
         <section class="panel">
-
-            <!-- ULTIMOS MOVIMIENTOS -->
             <div class="movimientos">
-
-                <h3>◷ &nbsp; Últimos movimientos</h3>
-
+                <h3> Últimos movimientos</h3>
                 <table>
                     <thead>
                         <tr>
@@ -101,7 +77,6 @@ if(!isset($_SESSION['nombre_completo'])){
                             <th>Cantidad</th>
                         </tr>
                     </thead>
-
                     <tbody>
                         <tr>
                             <td>26/04/2026</td>
@@ -109,28 +84,24 @@ if(!isset($_SESSION['nombre_completo'])){
                             <td>Tornillos 1"</td>
                             <td class="positivo">+100</td>
                         </tr>
-
                         <tr>
                             <td>26/04/2026</td>
                             <td><span class="etiqueta salida-t">Salida</span></td>
                             <td>Martillo 10 oz</td>
                             <td class="negativo">-3</td>
                         </tr>
-
                         <tr>
                             <td>26/04/2026</td>
                             <td><span class="etiqueta entrada-t">Entrada</span></td>
                             <td>Cemento 50 kg</td>
                             <td class="positivo">+20</td>
                         </tr>
-
                         <tr>
                             <td>26/04/2026</td>
                             <td><span class="etiqueta salida-t">Salida</span></td>
                             <td>Pintura 4 L</td>
                             <td class="negativo">-5</td>
                         </tr>
-
                         <tr>
                             <td>26/04/2026</td>
                             <td><span class="etiqueta entrada-t">Entrada</span></td>
@@ -139,15 +110,10 @@ if(!isset($_SESSION['nombre_completo'])){
                         </tr>
                     </tbody>
                 </table>
-
             </div>
 
-
-            <!-- PRODUCTOS CON POCO STOCK -->
             <div class="poco-stock">
-
-                <h3>⚠ &nbsp; Productos con poco stock</h3>
-
+                <h3>Productos con poco stock</h3>
                 <table>
                     <thead>
                         <tr>
@@ -156,44 +122,35 @@ if(!isset($_SESSION['nombre_completo'])){
                             <th>Mínimo</th>
                         </tr>
                     </thead>
-
-                    <tbody>
+                    <body>
                         <tr>
-                            <td>◈ &nbsp; Pintura 4 L</td>
+                            <td> Pintura 4 L</td>
                             <td class="negativo">2</td>
                             <td>5</td>
                         </tr>
-
                         <tr>
-                            <td>◈ &nbsp; Disco de corte</td>
+                            <td> Disco de corte</td>
                             <td class="negativo">4</td>
                             <td>10</td>
                         </tr>
-
                         <tr>
-                            <td>◈ &nbsp; Cemento 50 kg</td>
+                            <td> Cemento 50 kg</td>
                             <td class="negativo">6</td>
                             <td>15</td>
                         </tr>
-
                         <tr>
-                            <td>◈ &nbsp; Tornillos 1"</td>
+                            <td> Tornillos 1"</td>
                             <td class="negativo">5</td>
                             <td>20</td>
                         </tr>
-
                         <tr>
-                            <td>◈ &nbsp; Taladro 3/8"</td>
+                            <td> Taladro 3/8"</td>
                             <td class="negativo">1</td>
                             <td>5</td>
                         </tr>
-                    </tbody>
+                    </body>
                 </table>
-
             </div>
-
         </section>
-
     </main>
-
     <footer></footer>
