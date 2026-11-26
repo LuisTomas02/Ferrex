@@ -1,7 +1,7 @@
 <?php
 class Conexion{
     private $host ="localhost";
-    private $bd ="Notas";
+    private $bd ="ferreteria";
     private $user ="root";
     private $password ="";
 

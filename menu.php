@@ -1,8 +1,34 @@
 <?php
-session_start();
-if(!isset($_SESSION['nombre_completo'])){
+
+if(!isset($_SESSION['id_usuario'])){
     header('location: login.php');
+    exit();
 }
+
+require_once('clases/Conexion.php');
+
+$instancia = new Conexion();
+$conexion = $instancia->conectar();
+
+$sql = "SELECT movimientos.fecha,
+               movimientos.tipo,
+               productos.nombre,
+               movimientos.cantidad
+        FROM movimientos
+        INNER JOIN productos
+        ON movimientos.id_producto = productos.id_producto
+        ORDER BY movimientos.fecha DESC
+        LIMIT 5";
+
+$movimientos = $conexion->query($sql)->fetchAll();
+
+$sql2 = "SELECT nombre, stock, stock_minimo
+         FROM productos
+         WHERE stock <= stock_minimo
+         ORDER BY stock ASC
+         LIMIT 5";
+
+$poco_stock = $conexion->query($sql2)->fetchAll();
 
 ?>
 
@@ -11,7 +37,7 @@ if(!isset($_SESSION['nombre_completo'])){
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Notas</title>
+        <title>Ferrex</title>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
         <link rel="stylesheet" type="text/css" href="css/styles.css">
         <script src="js/bootstrap.js"></script>
@@ -29,10 +55,13 @@ if(!isset($_SESSION['nombre_completo'])){
             <span>Ctrl K</span>
         </div>
 
-        <div class="iconos">
-            <button>🔔</button>
-            <button>⚙️</button>
-        </div>
+       <div class="iconos">
+    <button>🔔</button>
+    <button>⚙️</button>
+    <a href="controladores/cerrar_sesion.php" class="btn-cerrar">
+    Cerrar sesión
+</a>
+</div>
 
     </header>
 
@@ -45,11 +74,11 @@ if(!isset($_SESSION['nombre_completo'])){
         <!-- OPCIONES DEL SISTEMA -->
         <section class="opciones">
 
-            <a href="#" class="tarjeta inventario">
-                <div class="icono">▤</div>
-                <h3>Inventario</h3>
-                <p>Revisar stock disponible</p>
-            </a>
+           <a href="inventario.php" class="tarjeta inventario">
+    <div class="icono">▤</div>
+    <h3>Inventario</h3>
+    <p>Revisar stock disponible</p>
+</a>
 
             <a href="#" class="tarjeta entrada">
                 <div class="icono">🛒</div>
@@ -69,7 +98,7 @@ if(!isset($_SESSION['nombre_completo'])){
                 <p>Gestión de contactos</p>
             </a>
 
-            <a href="#" class="tarjeta productos">
+            <a href="productos.php" class="tarjeta productos">
                 <div class="icono">⬡</div>
                 <h3>Productos</h3>
                 <p>Consulta y administración</p>
@@ -102,42 +131,40 @@ if(!isset($_SESSION['nombre_completo'])){
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>26/04/2026</td>
-                            <td><span class="etiqueta entrada-t">Entrada</span></td>
-                            <td>Tornillos 1"</td>
-                            <td class="positivo">+100</td>
-                        </tr>
+                <tbody>
 
-                        <tr>
-                            <td>26/04/2026</td>
-                            <td><span class="etiqueta salida-t">Salida</span></td>
-                            <td>Martillo 10 oz</td>
-                            <td class="negativo">-3</td>
-                        </tr>
+    <?php foreach($movimientos as $m){ ?>
 
-                        <tr>
-                            <td>26/04/2026</td>
-                            <td><span class="etiqueta entrada-t">Entrada</span></td>
-                            <td>Cemento 50 kg</td>
-                            <td class="positivo">+20</td>
-                        </tr>
+        <tr>
+            <td><?= date('d/m/Y', strtotime($m['fecha'])) ?></td>
 
-                        <tr>
-                            <td>26/04/2026</td>
-                            <td><span class="etiqueta salida-t">Salida</span></td>
-                            <td>Pintura 4 L</td>
-                            <td class="negativo">-5</td>
-                        </tr>
+            <td>
+                <?php if($m['tipo'] == 'Entrada'){ ?>
+                    <span class="etiqueta entrada-t">Entrada</span>
+                <?php }else{ ?>
+                    <span class="etiqueta salida-t">Salida</span>
+                <?php } ?>
+            </td>
 
-                        <tr>
-                            <td>26/04/2026</td>
-                            <td><span class="etiqueta entrada-t">Entrada</span></td>
-                            <td>Clavos 2"</td>
-                            <td class="positivo">+200</td>
-                        </tr>
-                    </tbody>
+            <td><?= htmlspecialchars($m['nombre']) ?></td>
+
+            <?php if($m['tipo'] == 'Entrada'){ ?>
+                <td class="positivo">+<?= abs($m['cantidad']) ?></td>
+            <?php }else{ ?>
+                <td class="negativo">-<?= abs($m['cantidad']) ?></td>
+            <?php } ?>
+
+        </tr>
+
+    <?php } ?>
+
+    <?php if(empty($movimientos)){ ?>
+        <tr>
+            <td colspan="4">No hay movimientos registrados</td>
+        </tr>
+    <?php } ?>
+
+</tbody>
                 </table>
 
             </div>
@@ -158,36 +185,26 @@ if(!isset($_SESSION['nombre_completo'])){
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>◈ &nbsp; Pintura 4 L</td>
-                            <td class="negativo">2</td>
-                            <td>5</td>
-                        </tr>
 
-                        <tr>
-                            <td>◈ &nbsp; Disco de corte</td>
-                            <td class="negativo">4</td>
-                            <td>10</td>
-                        </tr>
+    <?php foreach($poco_stock as $p){ ?>
 
-                        <tr>
-                            <td>◈ &nbsp; Cemento 50 kg</td>
-                            <td class="negativo">6</td>
-                            <td>15</td>
-                        </tr>
+        <tr>
+            <td>◈ &nbsp; <?= htmlspecialchars($p['nombre']) ?></td>
+            <td class="negativo"><?= $p['stock'] ?></td>
+            <td><?= $p['stock_minimo'] ?></td>
+        </tr>
 
-                        <tr>
-                            <td>◈ &nbsp; Tornillos 1"</td>
-                            <td class="negativo">5</td>
-                            <td>20</td>
-                        </tr>
+    <?php } ?>
 
-                        <tr>
-                            <td>◈ &nbsp; Taladro 3/8"</td>
-                            <td class="negativo">1</td>
-                            <td>5</td>
-                        </tr>
-                    </tbody>
+    <?php if(empty($poco_stock)){ ?>
+
+        <tr>
+            <td colspan="3">No hay productos con poco stock</td>
+        </tr>
+
+    <?php } ?>
+
+</tbody>
                 </table>
 
             </div>

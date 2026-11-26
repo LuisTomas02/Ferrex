@@ -289,3 +289,19 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/*BOTON DE CERRAR SESION*/
+.btn-cerrar {
+    background-color: #222;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.btn-cerrar:hover {
+    background-color: #444;
+    color: white;
+}
